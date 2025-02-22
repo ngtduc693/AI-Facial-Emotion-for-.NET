@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Facial.Emotion", "AI.Facial.Emotion\AI.Facial.Emotion.csproj", "{3ED95A72-1B80-457A-8EB7-FFD6A9FF6A6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WindowsApp", "Example.WindowsApp\Example.WindowsApp.csproj", "{3C60356F-32D3-4ECE-B31A-2FDFC1AA10FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ED95A72-1B80-457A-8EB7-FFD6A9FF6A6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED95A72-1B80-457A-8EB7-FFD6A9FF6A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED95A72-1B80-457A-8EB7-FFD6A9FF6A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED95A72-1B80-457A-8EB7-FFD6A9FF6A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C60356F-32D3-4ECE-B31A-2FDFC1AA10FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C60356F-32D3-4ECE-B31A-2FDFC1AA10FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C60356F-32D3-4ECE-B31A-2FDFC1AA10FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C60356F-32D3-4ECE-B31A-2FDFC1AA10FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67E1BB9A-131C-4BF5-A32E-58A7B719DE51}
+	EndGlobalSection
+EndGlobal

@@ -1,4 +1,4 @@
-# AI.Facial.Emotion
+﻿# AI.Facial.Emotion
 
 [![NuGet](https://img.shields.io/nuget/v/AI.Facial.Emotion.svg)](https://www.nuget.org/packages/AI.Facial.Emotion/)
 

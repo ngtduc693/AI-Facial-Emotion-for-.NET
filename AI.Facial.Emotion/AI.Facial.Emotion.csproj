@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <PackageId>AI.Facial.Emotion</PackageId>
+        <Version>25.3.3</Version>
+        <Authors>ngtduc693</Authors>
+        <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded
+AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>AI Facial Emotion</Title>
+        <PackageTags>AI,Emotion,.NET,Face</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RepositoryUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</RepositoryUrl>
+        <RepositoryType>Public</RepositoryType>
+        <PackageReleaseNotes>25.3.3. Improve the performance
+25.3.2. Improve the performance</PackageReleaseNotes>
+        <UserSecretsId>f3441286-a018-4373-a686-c21fdc43cac8</UserSecretsId>
+        <PackageIcon>icons.jpg</PackageIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\imgs\icons.jpg">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="LICENSE.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Emgu.CV" Version="4.10.0.5680" />
+        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.20.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Exceptions\" />
+        <Folder Include="Extensions\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\detectionv2.onnx" />
+      <None Remove="Resources\model_quantized.onnx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\emotion-ferplus-8.onnx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\emotion.onnx" />
+      <EmbeddedResource Include="Resources\detectionv2.onnx" />
+      <EmbeddedResource Include="Resources\emotion.onnx" />
+    </ItemGroup>
+
+</Project>
