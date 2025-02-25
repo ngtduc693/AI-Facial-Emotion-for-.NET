@@ -31,8 +31,16 @@ public class EmotionRecognizer
 
         using var results = _session.Run(inputs);
         var scores = results.First().AsEnumerable<float>().ToArray();
+        scores = Softmax(scores);
         int maxIndex = Array.IndexOf(scores, scores.Max());
         return _emotionLabels[maxIndex];
+    }
+    
+    private float[] Softmax(float[] scores)
+    {
+        float max = scores.Max();
+        float sum = scores.Sum(s => (float)Math.Exp(s - max));
+        return scores.Select(s => (float)Math.Exp(s - max) / sum).ToArray();
     }
 
     private DenseTensor<float> PreprocessFace(Image<Rgb24> image)

@@ -14,11 +14,11 @@ namespace WinForms;
 public class EmotionAnalyzer
 {
     private readonly FaceDetector _faceDetector;
-    private readonly EmotionRecognizer _emotionDetector;
+    private readonly EmotionRecognizer _emotionRecognizer;
     public EmotionAnalyzer()
     {
         _faceDetector = new FaceDetector();
-        _emotionDetector = new EmotionRecognizer();
+        _emotionRecognizer = new EmotionRecognizer();
     }
     
     public async Task<EmotionResult> AnalyzeEmotionFromUrlAsync(string imageUrl)
@@ -40,56 +40,55 @@ public class EmotionAnalyzer
         await fileStream.CopyToAsync(memoryStream);
         return Analyze(memoryStream.ToArray());
     }
-    
+
     public EmotionResult Analyze(byte[] imageData)
     {
         using var image = Image.Load<Rgb24>(imageData);
         var detectedFaces = _faceDetector.DetectFaces(image);
 
         if (detectedFaces.Length == 0)
-            throw new Exception("No face detected");
-        
-        var faceBox = detectedFaces[0];
-        
-        int x1 = (faceBox[0] > 1) ? (int)faceBox[0] : (int)(faceBox[0] * image.Width);
-        int y1 = (faceBox[1] > 1) ? (int)faceBox[1] : (int)(faceBox[1] * image.Height);
-        int x2 = (faceBox[2] > 1) ? (int)faceBox[2] : (int)(faceBox[2] * image.Width);
-        int y2 = (faceBox[3] > 1) ? (int)faceBox[3] : (int)(faceBox[3] * image.Height);
-        if (x2 <= x1 || y2 <= y1)
-            throw new Exception("Face coordinates are invalid");
-        
-        var faceImage = image.Clone(ctx => ctx.Crop(new Rectangle(x1, y1, x2 - x1, y2 - y1)));   
-        faceImage.Mutate(ctx => ctx.Resize(260, 260));
-        faceImage.Save("debug_face_image.png");
-
-        var emotionResult = _emotionDetector.PredictEmotion(faceImage);
-        
-        return new EmotionResult { Emotion = emotionResult};
-    }
-    
-    private Image<Rgb24> ResizeWithPadding(Image<Rgb24> image, int targetWidth, int targetHeight)
-    {
-        float imageRatio = (float)image.Height / image.Width;
-        float targetRatio = (float)targetHeight / targetWidth;
-    
-        int newWidth, newHeight;
-        if (imageRatio > targetRatio)
         {
-            newHeight = targetHeight;
-            newWidth = (int)(targetHeight / imageRatio);
+            return new EmotionResult { };
+        }
+
+        var faceBox = detectedFaces[0];
+
+        bool isRelative = faceBox[0] < 1.0f && faceBox[1] < 1.0f;
+
+        float x1, y1, x2, y2;
+        if (isRelative)
+        {
+            x1 = (faceBox[0] - faceBox[2] / 2) * image.Width;
+            y1 = (faceBox[1] - faceBox[3] / 2) * image.Height;
+            x2 = (faceBox[0] + faceBox[2] / 2) * image.Width;
+            y2 = (faceBox[1] + faceBox[3] / 2) * image.Height;
         }
         else
         {
-            newWidth = targetWidth;
-            newHeight = (int)(targetWidth * imageRatio);
+            x1 = faceBox[0];
+            y1 = faceBox[1];
+            x2 = faceBox[2];
+            y2 = faceBox[3];
         }
 
-        var resized = image.Clone(ctx => ctx.Resize(newWidth, newHeight));
-        var padded = new Image<Rgb24>(targetWidth, targetHeight);
-        padded.Mutate(ctx => ctx.DrawImage(resized, new Point((targetWidth - newWidth) / 2, (targetHeight - newHeight) / 2), 1f));
+        int x1_int = Math.Max(0, Math.Min((int)((faceBox[0] - (faceBox[2] / 2)) * image.Width), image.Width - 1));
+        int y1_int = Math.Max(0, Math.Min((int)((faceBox[1] - (faceBox[3] / 2)) * image.Height), image.Height - 1));
+        int x2_int = Math.Max(0, Math.Min((int)((faceBox[0] + (faceBox[2] / 2)) * image.Width), image.Width - 1));
+        int y2_int = Math.Max(0, Math.Min((int)((faceBox[1] + (faceBox[3] / 2)) * image.Height), image.Height - 1));
 
-        return padded;
+        var faceImage = image.Clone(ctx => ctx.Crop(new Rectangle(
+            x1_int, 
+            y1_int, 
+            Math.Max(1, x2_int - x1_int),
+            Math.Max(1, y2_int - y1_int) 
+        )));
+
+        faceImage.Save("debug.jpg");
+        
+        var emotionScores = _emotionRecognizer.PredictEmotion(faceImage);
+        return new EmotionResult
+        {
+            Emotion = emotionScores,
+        };
     }
-    
-    
 }
