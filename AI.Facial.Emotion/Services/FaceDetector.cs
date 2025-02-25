@@ -1,25 +1,25 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Numerics.Tensors;
 using System.Text.RegularExpressions;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using AI.Facial.Emotion.Helpers;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using Size = SixLabors.ImageSharp.Size;
-namespace WinForms;
+
+namespace AI.Facial.Emotion;
 
 public class FaceDetector
 {
     private readonly InferenceSession _session;
     private readonly float _scoreThreshold = 0.5f;
-
     public FaceDetector()
     {
-        _session = new InferenceSession(Utils.LoadEmbeddedResource("WinForms.Resources.detection.onnx"));
+        _session = new InferenceSession(Utils.LoadEmbeddedResource("AI.Facial.Emotion.Resources.detection.onnx"));
     }
-    
     private float[][] ApplyNMS(float[] allBboxes, float[] allScores, float threshold)
     {
         List<float[]> filteredBoxes = new List<float[]>();
@@ -58,7 +58,7 @@ public class FaceDetector
         return intersection / (areaA + areaB - intersection);
     }
 
-    public float[][] DetectFaces(Image<Rgb24> image)
+    internal float[][] DetectFaces(Image<Rgb24> image)
     {
         int inputSize = 640;
 

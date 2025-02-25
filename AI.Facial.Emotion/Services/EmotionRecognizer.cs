@@ -1,24 +1,21 @@
-﻿using System;
-using System.Linq;
-using System.Numerics.Tensors;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using Size = SixLabors.ImageSharp.Size;
-using System.Reflection;
-using Microsoft.ML.OnnxRuntime;
-namespace WinForms;
+using AI.Facial.Emotion.Helpers;
+using AI.Facial.Emotion.Interface;
 
-public class EmotionRecognizer
+namespace AI.Facial.Emotion;
+
+internal class EmotionRecognizer : IEmotionRecognizer
 {
     private readonly InferenceSession _session;
     private readonly string[] _emotionLabels = { "ANGER", "DISGUST", "FEAR", "HAPPINESS", "NEUTRAL", "SADNESS", "SURPRISE" };
 
     public EmotionRecognizer()
     {
-        _session = new InferenceSession(Utils.LoadEmbeddedResource("WinForms.Resources.emotion.onnx"));
+        _session = new InferenceSession(Utils.LoadEmbeddedResource("AI.Facial.Emotion.Resources.emotion.onnx"));
     }
 
     public string PredictEmotion(Image<Rgb24> faceImage)

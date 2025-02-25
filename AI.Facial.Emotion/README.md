@@ -28,7 +28,7 @@ Ensure your .NET Web API project must be .NET 6 above.
 using AI.Facial.Emotion;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<OnnxEmotionAnalyzer>();
+builder.Services.AddSingleton<EmotionAnalyzer>();
 var app = builder.Build();
 app.MapControllers();
 app.Run();
@@ -41,12 +41,12 @@ For example
 1️⃣ Analyze emotion from an image URL
 
 ````csharp
-using EmotionAnalyzerLib.Services;
+using AI.Facial.Emotion;
 
 var analyzer = new EmotionAnalyzer();
 var result = await analyzer.AnalyzeEmotionFromUrlAsync("https://example.com/image.jpg");
 
-Console.WriteLine($"Emotion: {result.ToString()}");
+Console.WriteLine($"Emotion: {result.Emotion.ToString()}");
 ````
 
 2️⃣ Analyze emotion from a Base64 image string
@@ -55,7 +55,7 @@ Console.WriteLine($"Emotion: {result.ToString()}");
 var base64Image = "iVBORw0KGgoAAAANSUhEUgAA...";
 var result = await analyzer.AnalyzeEmotionFromBase64Async(base64Image);
 
-Console.WriteLine($"Emotion: {result.ToString()}");
+Console.WriteLine($"Emotion: {result.Emotion.ToString()}");
 ````
 
 3️⃣ Analyze emotion from a file stream
@@ -64,15 +64,14 @@ Console.WriteLine($"Emotion: {result.ToString()}");
 using var fileStream = File.OpenRead("image.jpg");
 var result = await analyzer.AnalyzeEmotionFromStreamAsync(fileStream);
 
-Console.WriteLine($"Emotion: {result.ToString()}");
+Console.WriteLine($"Emotion: {result.Emotion.ToString()}");
 ````
 
 ## Example Response
 
 ```json
 {
-  "emotion": "joy",
-  "confidence": 0.98
+  "emotion": "sadness"
 }
 ```
 

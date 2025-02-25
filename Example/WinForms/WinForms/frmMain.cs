@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using AI.Facial.Emotion;
+
 namespace WinForms;
 
 public partial class frmMain : Form

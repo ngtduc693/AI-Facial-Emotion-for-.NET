@@ -1,6 +1,6 @@
-﻿using System.Reflection;
+using System.Reflection;
 
-namespace WinForms;
+namespace AI.Facial.Emotion.Helpers;
 
 public static class Utils
 {

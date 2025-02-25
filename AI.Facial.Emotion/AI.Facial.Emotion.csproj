@@ -4,7 +4,7 @@
         <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>AI.Facial.Emotion</PackageId>
-        <Version>25.2.24</Version>
+        <Version>25.2.25</Version>
         <Authors>ngtduc693</Authors>
         <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion, age, and gender, using an ONNX model. It seamlessly integrates with ASP.NET Web API, providing efficient and secure facial analysis with embedded AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -31,6 +31,7 @@
         <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.20.1"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6"/>
+        <PackageReference Include="System.Numerics.Tensors" Version="9.0.2" />
     </ItemGroup>
 
     <ItemGroup>
