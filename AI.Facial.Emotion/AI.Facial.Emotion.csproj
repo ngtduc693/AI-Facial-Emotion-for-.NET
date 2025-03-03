@@ -4,10 +4,9 @@
         <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>AI.Facial.Emotion</PackageId>
-        <Version>25.3.3.2</Version>
+        <Version>25.3.4</Version>
         <Authors>ngtduc693</Authors>
-        <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded
-AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
+        <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,7 +15,8 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</RepositoryUrl>
         <RepositoryType>Public</RepositoryType>
-        <PackageReleaseNotes>25.3.3. Improve the performance
+        <PackageReleaseNotes>25.3.4. Allow user can adjust the threshold, topK and nms
+25.3.3. Improve the performance
 25.3.2. Improve the performance</PackageReleaseNotes>
         <UserSecretsId>f3441286-a018-4373-a686-c21fdc43cac8</UserSecretsId>
         <PackageIcon>icons.jpg</PackageIcon>

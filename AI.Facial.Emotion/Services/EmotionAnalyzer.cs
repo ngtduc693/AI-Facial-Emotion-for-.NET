@@ -2,7 +2,7 @@ using AI.Facial.Emotion.Helpers;
 using AI.Facial.Emotion.Interface;
 using AI.Facial.Emotion.Models;
 
-namespace AI.Facial.Emotion.Services;
+namespace AI.Facial.Emotion;
 
 public class EmotionAnalyzer : IEmotionAnalyzer
 {

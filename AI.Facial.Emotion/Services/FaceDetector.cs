@@ -4,9 +4,9 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Dnn;
 using System.Drawing;
 
-namespace AI.Facial.Emotion.Services;
+namespace AI.Facial.Emotion;
 
-public class FaceDetector
+internal class FaceDetector
 {
     private const int RequiredSize = 320;
 
