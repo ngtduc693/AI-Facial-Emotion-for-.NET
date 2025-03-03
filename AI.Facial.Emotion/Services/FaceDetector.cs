@@ -4,7 +4,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Dnn;
 using System.Drawing;
 
-namespace AI.Facial.Emotion;
+namespace AI.Facial.Emotion.Services;
 
 public class FaceDetector
 {
@@ -12,7 +12,7 @@ public class FaceDetector
 
     public List<Mat> DetectFaces(byte[] imageBytes, float threshold, float nmsThreshold, int topK)
     {
-        using var image = new Mat();
+        using Mat image = new();
 
         CvInvoke.Imdecode(imageBytes, ImreadModes.Color, image);
 
@@ -36,11 +36,11 @@ public class FaceDetector
             processedImage = image;
         }
 
-        using var model = InitializeFaceDetectionModel(new Size(RequiredSize, RequiredSize), threshold, nmsThreshold, topK);
-        var faces = new Mat();
-        model.Detect(processedImage, faces);
+        using FaceDetectorYN model = InitializeFaceDetectionModel(new Size(RequiredSize, RequiredSize), threshold, nmsThreshold, topK);
+        Mat faces = new();
+        _ = model.Detect(processedImage, faces);
 
-        var facesList = CropFaces(processedImage, faces);
+        List<Mat> facesList = CropFaces(processedImage, faces);
 
         if (processedImage != image)
         {
@@ -64,28 +64,28 @@ public class FaceDetector
 
     private List<Mat> CropFaces(Mat image, Mat faces)
     {
-        var faceImage = new List<Mat>();
+        List<Mat> faceImage = new();
         if (faces == null || faces.IsEmpty || faces.Rows <= 0)
         {
             throw new Exception(ErrorMessage.IMG_NO_FACE);
         }
 
-        var facesData = (float[,])faces.GetData(jagged: true);
+        float[,] facesData = (float[,])faces.GetData(jagged: true);
 
-        for (var i = 0; i < facesData.GetLength(0); i++)
+        for (int i = 0; i < facesData.GetLength(0); i++)
         {
             int x = (int)facesData[i, 0];
             int y = (int)facesData[i, 1];
             int width = (int)facesData[i, 2];
             int height = (int)facesData[i, 3];
-            float confidence = facesData[i, 14];
+            _ = facesData[i, 14];
 
             x = Math.Max(0, x);
             y = Math.Max(0, y);
             width = Math.Min(width, image.Width - x);
             height = Math.Min(height, image.Height - y);
 
-            var faceRectangle = new Rectangle(x, y, width, height);
+            Rectangle faceRectangle = new(x, y, width, height);
             faceImage.Add(new Mat(image, faceRectangle));
         }
         return faceImage;

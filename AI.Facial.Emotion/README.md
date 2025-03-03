@@ -1,7 +1,5 @@
 ﻿# AI.Facial.Emotion
 
-[![NuGet](https://img.shields.io/nuget/v/AI.Facial.Emotion.svg)](https://www.nuget.org/packages/AI.Facial.Emotion/)
-
 **AI.Facial.Emotion** is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded
 AI models. Ideal for chatbots, customer insights, security, and healthcare applications.
 

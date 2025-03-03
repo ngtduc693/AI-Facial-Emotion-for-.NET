@@ -4,7 +4,7 @@
         <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>AI.Facial.Emotion</PackageId>
-        <Version>25.3.3</Version>
+        <Version>25.3.3.2</Version>
         <Authors>ngtduc693</Authors>
         <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded
 AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
