@@ -1,7 +1,7 @@
 using AI.Facial.Emotion.Helpers;
 using AI.Facial.Emotion.Interface;
 using AI.Facial.Emotion.Models;
-
+using Emgu.CV.Dnn;
 namespace AI.Facial.Emotion;
 
 public class EmotionAnalyzer : IEmotionAnalyzer
@@ -14,7 +14,7 @@ public class EmotionAnalyzer : IEmotionAnalyzer
     {
         _faceDetector = new FaceDetector();
         _emotionRecognizer = new EmotionRecognizer();
-        _configuration = new Configuration() { Threshold = 0.5f, NmsThreshold = 0.3f, topK = 5000 };
+        _configuration = new Configuration() { Threshold = 0.5f, NmsThreshold = 0.3f, TopK = 5000, TargetHadware = Target.Cpu };
     }
     public EmotionAnalyzer(Configuration configuration)
     {
@@ -45,14 +45,14 @@ public class EmotionAnalyzer : IEmotionAnalyzer
 
     private EmotionResult Analyze(byte[] imageData)
     {
-        List<Emgu.CV.Mat> detectedFaces = _faceDetector.DetectFaces(imageData, _configuration.Threshold, _configuration.NmsThreshold, _configuration.topK);
+        var detectedFaces = _faceDetector.DetectFaces(imageData, _configuration);
 
         if (detectedFaces.Count == 0)
         {
             throw new Exception(ErrorMessage.IMG_NO_FACE);
         }
 
-        Emgu.CV.Mat faceBox = detectedFaces.First();
+        var faceBox = detectedFaces.First();
 
         string emotionScores = _emotionRecognizer.PredictEmotion(faceBox);
         return new EmotionResult

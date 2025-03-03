@@ -1,7 +1,9 @@
 ﻿using AI.Facial.Emotion.Helpers;
+using AI.Facial.Emotion.Models;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Dnn;
+using Microsoft.Extensions.Configuration;
 using System.Drawing;
 
 namespace AI.Facial.Emotion;
@@ -10,7 +12,7 @@ internal class FaceDetector
 {
     private const int RequiredSize = 320;
 
-    public List<Mat> DetectFaces(byte[] imageBytes, float threshold, float nmsThreshold, int topK)
+    public List<Mat> DetectFaces(byte[] imageBytes, Configuration configuration)
     {
         using Mat image = new();
 
@@ -36,7 +38,7 @@ internal class FaceDetector
             processedImage = image;
         }
 
-        using FaceDetectorYN model = InitializeFaceDetectionModel(new Size(RequiredSize, RequiredSize), threshold, nmsThreshold, topK);
+        using FaceDetectorYN model = InitializeFaceDetectionModel(new Size(RequiredSize, RequiredSize), configuration);
         Mat faces = new();
         _ = model.Detect(processedImage, faces);
 
@@ -49,17 +51,17 @@ internal class FaceDetector
         return facesList;
     }
 
-    private FaceDetectorYN InitializeFaceDetectionModel(Size inputSize, float threshold, float nmsThreshold, int topK)
+    private FaceDetectorYN InitializeFaceDetectionModel(Size inputSize, Configuration configuration)
     {
         return new FaceDetectorYN(
             model: Utils.ExtractEmbeddedResource("AI.Facial.Emotion.Resources.detectionv2.onnx"),
             config: string.Empty,
             inputSize: inputSize,
-            scoreThreshold: threshold,
-            nmsThreshold: nmsThreshold,
-            topK: topK,
+            scoreThreshold: configuration.Threshold,
+            nmsThreshold: configuration.NmsThreshold,
+            topK: configuration.TopK,
             backendId: Emgu.CV.Dnn.Backend.Default,
-            targetId: Target.Cpu);
+            targetId: configuration.TargetHadware);
     }
 
     private List<Mat> CropFaces(Mat image, Mat faces)
