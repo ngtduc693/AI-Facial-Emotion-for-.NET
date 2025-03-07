@@ -40,9 +40,9 @@ namespace Example.WebApps.Controllers
                 if (model?.ImageData != null)
                 {
                     string base64Data = model.ImageData.Split(',')[1];
-                    var result =_emotionAnalyzer.AnalyzeEmotionFromBase64Async(base64Data).Result.Emotion;
+                    var result = _emotionAnalyzer.AnalyzeEmotionFromBase64Async(base64Data).Result.Emotion;
 
-                    return Json(new { success = true, message = "Emotion is " + result });
+                    return Json(new { success = true, message = result });
                 }
                 return Json(new { success = false, message = "Invalid data!" });
             }

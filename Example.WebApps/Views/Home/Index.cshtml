@@ -33,6 +33,7 @@
         <div id="preview-container" class="mt-4 hidden">
             <h3 class="text-lg font-semibold text-gray-700">📷 Photo taken</h3>
             <img id="preview" class="w-48 h-48 mx-auto mt-2 rounded-lg border shadow-lg" />
+            <h3 id="result" class="text-lg font-semibold text-gray-700"></h3>
         </div>
     </div>
 
@@ -71,7 +72,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ imageData: dataURL })
             }).then(response => response.json())
-              .then(data => alert("Processed image: " + data.message))
+              .then(data =>  document.getElementById('result').textContent = "📷 Emotion: " + data.message)
               .catch(error => console.error("Error:", error));
         });
     </script>
