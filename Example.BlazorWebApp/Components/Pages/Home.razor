@@ -1,0 +1,32 @@
+﻿@page "/"
+@inject HttpClient Http
+@code {
+    private string imageDataUrl;
+    private async Task CaptureImage()
+    {
+        imageDataUrl = await Js.InvokeAsync<string>("captureFromCamera");
+    }
+
+    private async Task SendImageToServer()
+    {
+        if (!string.IsNullOrEmpty(imageDataUrl))
+        {
+            var imageData = imageDataUrl.Split(',')[1];
+            await Http.PostAsJsonAsync("api/webcam/upload", new { ImageBase64 = imageData });
+        }
+    }
+}
+
+<h3>Chụp ảnh từ Webcam</h3>
+<video id="videoElement" autoplay></video>
+<button @onclick="CaptureImage">Chụp ảnh</button>
+<button @onclick="SendImageToServer">Gửi ảnh</button>
+
+@if (!string.IsNullOrEmpty(imageDataUrl))
+{
+    <img src="@imageDataUrl" style="max-width: 400px;" />
+}
+
+@code {
+    [Inject] IJSRuntime Js { get; set; }
+}

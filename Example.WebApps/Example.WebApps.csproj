@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AI.Facial.Emotion" Version="25.3.4.2231" />
+    <PackageReference Include="Emgu.CV.runtime.ubuntu-x64" Version="4.10.0.5680" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AI.Facial.Emotion\AI.Facial.Emotion.csproj" />
+  </ItemGroup>
+
+</Project>

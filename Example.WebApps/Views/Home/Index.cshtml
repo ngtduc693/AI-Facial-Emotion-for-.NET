@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "AI.Facial.Emotion C#.NET";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI.Facial.Emotion C#.NET</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex justify-center items-center">
+
+    <div class="bg-white shadow-2xl rounded-2xl p-6 w-96 text-center">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">📸 AI.Facial.Emotion C#.NET</h2>
+
+        <div class="relative w-64 h-64 mx-auto bg-black rounded-lg overflow-hidden">
+            <video id="video" class="w-full h-full object-cover" autoplay playsinline></video>
+        </div>
+
+        <div class="mt-4 flex justify-center gap-4">
+            <button id="capture"
+                    class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition">
+                1. Take a photo
+            </button>
+            <button id="upload"
+                    class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition">
+                2. Emotion Analysis
+            </button>
+        </div>
+
+        <div id="preview-container" class="mt-4 hidden">
+            <h3 class="text-lg font-semibold text-gray-700">📷 Photo taken</h3>
+            <img id="preview" class="w-48 h-48 mx-auto mt-2 rounded-lg border shadow-lg" />
+        </div>
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <script>
+        navigator.mediaDevices.getUserMedia({ video: { width: 300, height: 300 } })
+            .then(function (stream) {
+                let video = document.getElementById('video');
+                video.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error("Webcam access error:", error);
+            });
+
+        document.getElementById('capture').addEventListener('click', function () {
+            let video = document.getElementById('video');
+            let canvas = document.getElementById('canvas');
+            let context = canvas.getContext('2d');
+
+            canvas.width = 300;
+            canvas.height = 300;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            let dataURL = canvas.toDataURL('image/png');
+            document.getElementById('preview').src = dataURL;
+            document.getElementById('preview-container').classList.remove('hidden');
+        });
+
+        document.getElementById('upload').addEventListener('click', function () {
+            let canvas = document.getElementById('canvas');
+            let dataURL = canvas.toDataURL('image/png');
+
+            fetch('/Home/UploadImage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imageData: dataURL })
+            }).then(response => response.json())
+              .then(data => alert("Processed image: " + data.message))
+              .catch(error => console.error("Error:", error));
+        });
+    </script>
+
+</body>
+</html>
