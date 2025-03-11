@@ -7,6 +7,7 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
 
 ![Illustration](https://raw.githubusercontent.com/ngtduc693/AI-Facial-Emotion-for-.NET/refs/heads/main/imgs/hapiness.png)
 
+## 🚀 Demo [My demo website is hosted on Azure (FREE SKU) here](https://facial-emotion.azurewebsites.net/)
 ## 🚀 Features
 
 - Emotion Detection – Recognizes emotions such as happiness, sadness, anger, surprise, and more.
