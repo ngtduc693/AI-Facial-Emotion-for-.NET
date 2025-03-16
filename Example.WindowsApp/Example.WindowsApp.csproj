@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AI.Facial.Emotion" Version="25.3.4.2231" />
+    <PackageReference Include="AI.Facial.Emotion" Version="25.3.16" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.10.0.5680" />
   </ItemGroup>
 

@@ -3,7 +3,6 @@ using AI.Facial.Emotion.Models;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Dnn;
-using Microsoft.Extensions.Configuration;
 using System.Drawing;
 
 namespace AI.Facial.Emotion;
