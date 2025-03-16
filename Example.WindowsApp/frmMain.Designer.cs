@@ -80,7 +80,7 @@
             MaximizeBox = false;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AI Facial Emotion";
+            Text = "AI Facial Emotion in .NET 10";
             ((System.ComponentModel.ISupportInitialize)pbSelectedImage).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -5,14 +5,14 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
 
 ![Illustration](https://raw.githubusercontent.com/ngtduc693/AI-Facial-Emotion-for-.NET/refs/heads/main/imgs/hapiness.png)
 
-## 🚀 Demo [My demo website is hosted on Azure (FREE SKU) here](https://facial-emotion.azurewebsites.net/)
+## 🚀 Demo: [My demo website is hosted on Azure (FREE SKU) here](http://ai-facial.azurewebsites.net/Emotion)
 
 ![Azure demo](https://raw.githubusercontent.com/ngtduc693/AI-Facial-Emotion-for-.NET/refs/heads/main/imgs/azure-demo.png)
 
 ## 🚀 Features
 
 - Emotion Detection – Recognizes emotions such as happiness, sadness, anger, surprise, and more.
-- Optimized for .NET – Fully compatible with .NET 6/7/8/9.
+- Optimized for .NET – Fully compatible with **.NET 6, .NET 8, .NET 9 and .NET 10**.
 - **Easy Integration** – Works seamlessly with ASP.NET Web APIs, Windows Application, allowing quick integration into existing projects.
 - Supports multiple input formats: **URL, Base64, File Stream**
 
@@ -80,6 +80,16 @@ Console.WriteLine($"Emotion: {result.Emotion}");
 }
 ```
 
-## Contact
+## 📦 Contact
 
-For any questions, feel free to contact me or create an issue in the repository.
+For any questions, feel free to contact me or create an [issue](https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET) in the repository.
+
+## ⚡ Release note
+
+````bash
+25.3.16 Support for the newly released .NET 9 and .NET 10
+25.3.11 Update the Readme
+25.3.4.2231. Allow user can adjust the Target hardware like CPU, CUDA
+25.3.4. Allow user can adjust the threshold, topK and nms
+25.3.3. Improve the performance
+````

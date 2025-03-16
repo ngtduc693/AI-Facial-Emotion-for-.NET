@@ -14,15 +14,15 @@ namespace Example.WindowsApp
 
         private async void btnChooseFile_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            Stopwatch stopwatch = new ();
+            using (OpenFileDialog openFileDialog = new())
             {
                 openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = openFileDialog.FileName;
-                    pbSelectedImage.Image = System.Drawing.Image.FromFile(filePath);
+                    pbSelectedImage.Image = Image.FromFile(filePath);
 
                     try
                     {
@@ -30,7 +30,7 @@ namespace Example.WindowsApp
                         stopwatch.Start();
                         var result = await _emotionAnalyzer.AnalyzeEmotionFromStreamAsync(stream);
                         stopwatch.Stop();
-                        lblResult.Text = $"Emotion: {result.Emotion} in {stopwatch.ElapsedMilliseconds / 1000.0} s";
+                        lblResult.Text = $"Emotion: {result.Emotion}\n\rin {stopwatch.ElapsedMilliseconds / 1000.0} s";
                     }
                     catch (Exception ex)
                     {
