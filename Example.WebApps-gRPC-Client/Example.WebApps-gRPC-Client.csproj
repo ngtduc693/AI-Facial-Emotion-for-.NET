@@ -13,9 +13,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AI.Facial.Emotion" Version="25.3.16" />
-    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.10.0.5680" />
+    <PackageReference Include="Google.Protobuf" Version="3.30.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.70.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.71.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Example.gRPC\Example.gRPC.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\emotion.proto" GrpcServices="Client" />
+	</ItemGroup>
 
 </Project>

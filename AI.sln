@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Facial.Emotion", "AI.Fac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WindowsApp", "Example.WindowsApp\Example.WindowsApp.csproj", "{3C60356F-32D3-4ECE-B31A-2FDFC1AA10FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WebApps", "Example.WebApps\Example.WebApps.csproj", "{4EC5D961-A5E0-4CA4-982E-5ADDF7FF794B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WebApps-gRPC-Client", "Example.WebApps-gRPC-Client\Example.WebApps-gRPC-Client.csproj", "{4EC5D961-A5E0-4CA4-982E-5ADDF7FF794B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.gRPC", "Example.gRPC\Example.gRPC.csproj", "{42D63B2A-1E91-46DA-B877-5EBF36932BF0}"
 EndProject
