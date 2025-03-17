@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Example.gRPC";
+
+package emotion;
+
+service EmotionDetector {
+  rpc AnalyzeEmotionStream (stream EmotionRequest) returns (stream EmotionResponse);
+}
+
+message EmotionRequest {
+  bytes image_data = 1;
+}
+
+message EmotionResponse {
+  string emotion = 1;
+}
