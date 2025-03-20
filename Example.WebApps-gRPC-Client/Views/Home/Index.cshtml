@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "AI.Facial.Emotion C#.NET 10 with gRPC server";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI.Facial.Emotion C#.NET</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex justify-center items-center">
+
+    <div class="bg-white shadow-2xl rounded-2xl p-6 w-96 text-center">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">📸 AI.Facial.Emotion .NET 10 + gRPC server</h2>
+
+        <div class="relative w-64 h-64 mx-auto bg-black rounded-lg overflow-hidden">
+            <video id="video" class="w-full h-full object-cover" autoplay playsinline></video>
+        </div>
+
+        <div class="mt-4">
+            <h3 id="result" class="text-lg font-semibold text-gray-700">📷 Emotion: Processing ...</h3>
+        </div>
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <script>
+    navigator.mediaDevices.getUserMedia({ video: { width: 300, height: 300 } })
+        .then(stream => {
+            const video = document.getElementById('video');
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+                startEmotionAnalysis();
+            };
+        })
+        .catch(error => {
+            document.getElementById('result').textContent = `📷 Error: ${error.message}`;
+        });
+
+    function startEmotionAnalysis() {
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const result = document.getElementById('result');
+
+        canvas.width = 300;
+        canvas.height = 300;
+
+        setInterval(() => {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob(blob => {
+                if (!blob) {
+                    result.textContent = "📷 Error: No image data";
+                    return;
+                }
+                console.log("Blob size:", blob.size);
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const arrayBuffer = reader.result;
+                    if (!arrayBuffer) {
+                        return;
+                    }
+                    const bytes = new Uint8Array(arrayBuffer);
+                    if (bytes.length === 0) {
+                        console.error("Bytes is empty");
+                        return;
+                    }
+                    fetch('/Home/Analyze', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/octet-stream' },
+                        body: bytes
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        result.textContent = `📷 Emotion: ${data.emotion || 'Unknown'}`;
+                    })
+                    .catch(error => {
+                        result.textContent = `📷 Error: ${error.message}`;
+                    });
+                };
+                reader.readAsArrayBuffer(blob);
+            }, 'image/jpeg', 0.8);
+        }, 800);
+    }
+</script>
+
+</body>
+</html>

@@ -4,17 +4,20 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
-    <UserSecretsId>d372741f-ce69-4968-87c6-9d7f2877b5b9</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <PlatformTarget>x64</PlatformTarget>
-    <PublishAot>False</PublishAot>
-    <Platforms>AnyCPU;x64</Platforms>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <PublishAot>true</PublishAot>
+    <UserSecretsId>56bbebb5-3561-487d-ae25-107c35eec8dd</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\emotion.proto" GrpcServices="Server" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AI.Facial.Emotion" Version="25.3.16" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.10.0.5680" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.70.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
   </ItemGroup>
 
