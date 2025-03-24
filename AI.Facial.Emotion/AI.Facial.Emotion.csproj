@@ -4,7 +4,7 @@
         <TargetFrameworks>net10.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>AI.Facial.Emotion</PackageId>
-        <Version>25.3.26-net10</Version>
+        <Version>25.3.26</Version>
         <Authors>ngtduc693</Authors>
         <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -15,7 +15,9 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</RepositoryUrl>
         <RepositoryType>Public</RepositoryType>
-        <PackageReleaseNotes>25.3.26-net10: This version only supports .NET 10
+        <PackageReleaseNotes>25.3.26:
+ + Optimized for performance in compliance with the latest .NET 10 and C# 14.
+ + All subsequent versions starting from version 25.3.26-net10 only support .NET 10. If you are using an older version of .NET, please choose version 25.3.16
 25.3.16 Support for the newly released .NET 9 and .NET 10
 25.3.11 Update the Readme
 25.3.4.2231. Allow user can adjust the Target hardware like CPU, CUDA

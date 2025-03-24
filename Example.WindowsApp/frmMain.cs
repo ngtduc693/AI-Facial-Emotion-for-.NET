@@ -30,7 +30,7 @@ namespace Example.WindowsApp
                         stopwatch.Start();
                         var result = await _emotionAnalyzer.AnalyzeEmotionFromStreamAsync(stream);
                         stopwatch.Stop();
-                        lblResult.Text = $"Emotion: {result.Emotion}\n\rin {stopwatch.ElapsedMilliseconds / 1000.0} s";
+                        lblResult.Text = $"Emotion: {result}\n\rin {stopwatch.ElapsedMilliseconds / 1000.0} s";
                     }
                     catch (Exception ex)
                     {

@@ -19,7 +19,7 @@ public class EmotionDetectorService : EmotionDetector.EmotionDetectorBase
         {
             using var stream = new MemoryStream(request.ImageData.ToByteArray());
             var emotion = await _analyzer.AnalyzeEmotionFromStreamAsync(stream);
-            await responseStream.WriteAsync(new EmotionResponse { Emotion = emotion.Emotion });
+            await responseStream.WriteAsync(new EmotionResponse { Emotion = emotion });
         }
     }
 }

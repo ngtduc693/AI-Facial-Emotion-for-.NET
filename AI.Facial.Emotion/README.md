@@ -19,7 +19,7 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
 ## ⚡ Release note
 
 ````bash
-25.3.26-net 10:
+25.3.26:
  + Optimized for performance in compliance with the latest .NET 10 and C# 14.
  + All subsequent versions starting from version 25.3.26-net10 only support .NET 10. If you are using an older version of .NET, please choose version 25.3.16.
 25.3.16 Support for the newly released .NET 9 and .NET 10
@@ -64,7 +64,7 @@ using AI.Facial.Emotion;
 var analyzer = new EmotionAnalyzer();
 var result = await analyzer.AnalyzeEmotionFromUrlAsync("https://example.com/image.jpg");
 
-Console.WriteLine($"Emotion: {result.Emotion}");
+Console.WriteLine($"Emotion: {result}");
 ````
 
 2️⃣ Analyze emotion from a Base64 image string
@@ -73,7 +73,7 @@ Console.WriteLine($"Emotion: {result.Emotion}");
 var base64Image = "iVBORw0KGgoAAAANSUhEUgAA...";
 var result = await analyzer.AnalyzeEmotionFromBase64Async(base64Image);
 
-Console.WriteLine($"Emotion: {result.Emotion}");
+Console.WriteLine($"Emotion: {result}");
 ````
 
 3️⃣ Analyze emotion from a file stream
@@ -82,7 +82,7 @@ Console.WriteLine($"Emotion: {result.Emotion}");
 using var fileStream = File.OpenRead("image.jpg");
 var result = await analyzer.AnalyzeEmotionFromStreamAsync(fileStream);
 
-Console.WriteLine($"Emotion: {result.Emotion}");
+Console.WriteLine($"Emotion: {result}");
 ````
 
 ## Example Response

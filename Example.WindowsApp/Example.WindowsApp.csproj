@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AI.Facial.Emotion" Version="25.3.16" />
+    <PackageReference Include="AI.Facial.Emotion" Version="25.3.26" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.10.0.5680" />
   </ItemGroup>
 
