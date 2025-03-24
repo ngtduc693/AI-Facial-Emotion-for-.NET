@@ -18,6 +18,19 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
 - **Easy Integration** – Works seamlessly with ASP.NET Web APIs, Windows Application, allowing quick integration into existing projects.
 - Supports multiple input formats: **URL, Base64, File Stream**
 
+## ⚡ Release note
+
+````bash
+25.3.26-net 10:
+ + Optimized for performance in compliance with the latest .NET 10 and C# 14.
+ + All subsequent versions starting from version 25.3.26-net10 only support .NET 10. If you are using an older version of .NET, please choose version 25.3.16.
+25.3.16 Support for the newly released .NET 9 and .NET 10
+25.3.11 Update the Readme
+25.3.4.2231. Allow user can adjust the Target hardware like CPU, CUDA
+25.3.4. Allow user can adjust the threshold, topK and nms
+25.3.3. Improve the performance
+````
+
 ## 📦 Installation
 
 You can install this library via NuGet Package Manager:
@@ -85,13 +98,3 @@ Console.WriteLine($"Emotion: {result.Emotion}");
 ## 📦 Contact
 
 For any questions, feel free to contact me or create an [issue](https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET) in the repository.
-
-## ⚡ Release note
-
-````bash
-25.3.16 Support for the newly released .NET 9 and .NET 10
-25.3.11 Update the Readme
-25.3.4.2231. Allow user can adjust the Target hardware like CPU, CUDA
-25.3.4. Allow user can adjust the threshold, topK and nms
-25.3.3. Improve the performance
-````

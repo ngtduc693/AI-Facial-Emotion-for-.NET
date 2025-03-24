@@ -4,7 +4,7 @@ namespace AI.Facial.Emotion.Interface;
 
 public interface IEmotionAnalyzer
 {
-    Task<EmotionResult> AnalyzeEmotionFromUrlAsync(string imageUrl);
-    Task<EmotionResult> AnalyzeEmotionFromBase64Async(string base64Image);
-    Task<EmotionResult> AnalyzeEmotionFromStreamAsync(Stream fileStream);
+    Task<string> AnalyzeEmotionFromUrlAsync(string imageUrl);
+    Task<string> AnalyzeEmotionFromBase64Async(string base64Image);
+    Task<string> AnalyzeEmotionFromStreamAsync(Stream fileStream);
 }

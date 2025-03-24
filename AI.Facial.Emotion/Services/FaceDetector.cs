@@ -2,8 +2,8 @@
 using AI.Facial.Emotion.Models;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
-using Emgu.CV.Dnn;
 using System.Drawing;
+using System.Reflection;
 
 namespace AI.Facial.Emotion;
 
@@ -11,84 +11,66 @@ internal class FaceDetector
 {
     private const int RequiredSize = 320;
 
-    public List<Mat> DetectFaces(byte[] imageBytes, Configuration configuration)
+
+    public List<Mat> DetectFaces(ReadOnlySpan<byte> imageBytes, Configuration configuration)
     {
-        using Mat image = new();
+        using var image = new Mat();
+        CvInvoke.Imdecode(imageBytes.ToArray(), ImreadModes.Color, image);
 
-        CvInvoke.Imdecode(imageBytes, ImreadModes.Color, image);
+        if (image.IsEmpty) throw new Exception(ErrorMessage.IMG_COULD_LOAD);
+        if (image.Width != image.Height) throw new Exception($"{ErrorMessage.IMG_INVALID_RATIO} {image.Width}x{image.Height}");
 
-        if (image.IsEmpty)
-        {
-            throw new Exception(ErrorMessage.IMG_COULD_LOAD);
-        }
-        if (image.Width != image.Height)
-        {
-            throw new Exception(ErrorMessage.IMG_INVALID_RATIO +
-                              $"{image.Width}x{image.Height}");
-        }
-        Mat processedImage;
-        if (image.Width != RequiredSize || image.Height != RequiredSize)
-        {
-            processedImage = new Mat();
-            CvInvoke.Resize(image, processedImage, new Size(RequiredSize, RequiredSize));
-        }
-        else
-        {
-            processedImage = image;
-        }
+        using var processedImage = image.Width != RequiredSize || image.Height != RequiredSize
+            ? (new Mat().Also(m => CvInvoke.Resize(image, m, new Size(RequiredSize, RequiredSize))))
+            : image;
 
-        using FaceDetectorYN model = InitializeFaceDetectionModel(new Size(RequiredSize, RequiredSize), configuration);
-        Mat faces = new();
-        _ = model.Detect(processedImage, faces);
+        using var model = InitializeFaceDetectorModel(new Size(RequiredSize, RequiredSize), configuration);
+        using var faces = new Mat();
+        model.Detect(processedImage, faces);
 
-        List<Mat> facesList = CropFaces(processedImage, faces);
-
-        if (processedImage != image)
-        {
-            processedImage.Dispose();
-        }
-        return facesList;
+        return CropFaces(processedImage, faces);
     }
 
-    private FaceDetectorYN InitializeFaceDetectionModel(Size inputSize, Configuration configuration)
+    private static readonly Lazy<string> _modelPath = new(() =>
     {
-        return new FaceDetectorYN(
-            model: Utils.ExtractEmbeddedResource("AI.Facial.Emotion.Resources.detectionv2.onnx"),
-            config: string.Empty,
-            inputSize: inputSize,
-            scoreThreshold: configuration.Threshold,
-            nmsThreshold: configuration.NmsThreshold,
-            topK: configuration.TopK,
-            backendId: Emgu.CV.Dnn.Backend.Default,
-            targetId: configuration.TargetHadware);
-    }
+        var resourceName = ModelResourceNames.FaceDetectionModel;
+        var tempPath = Path.Combine(Path.GetTempPath(), "detectionv2.onnx");
+        if (!File.Exists(tempPath))
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var modelData = assembly.LoadEmbeddedResource(resourceName);
+            File.WriteAllBytes(tempPath, modelData);
+        }
+        return tempPath;
+    });
+
+    private FaceDetectorYN InitializeFaceDetectorModel(Size inputSize, Configuration configuration) =>
+        new(
+            _modelPath.Value,
+            string.Empty,
+            inputSize,
+            configuration.Threshold,
+            configuration.NmsThreshold,
+            configuration.TopK,
+            Emgu.CV.Dnn.Backend.Default,
+            configuration.TargetHadware);
 
     private List<Mat> CropFaces(Mat image, Mat faces)
     {
-        List<Mat> faceImage = new();
-        if (faces == null || faces.IsEmpty || faces.Rows <= 0)
-        {
-            throw new Exception(ErrorMessage.IMG_NO_FACE);
-        }
+        if (faces is null || faces.IsEmpty || faces.Rows <= 0) throw new Exception(ErrorMessage.IMG_NO_FACE);
 
-        float[,] facesData = (float[,])faces.GetData(jagged: true);
+        var facesData = (float[,])faces.GetData(jagged: true);
+        var faceImages = new List<Mat>(facesData.GetLength(0));
 
         for (int i = 0; i < facesData.GetLength(0); i++)
         {
-            int x = (int)facesData[i, 0];
-            int y = (int)facesData[i, 1];
-            int width = (int)facesData[i, 2];
-            int height = (int)facesData[i, 3];
-            _ = facesData[i, 14];
+            int x = Math.Max(0, (int)facesData[i, 0]);
+            int y = Math.Max(0, (int)facesData[i, 1]);
+            int width = Math.Min((int)facesData[i, 2], image.Width - x);
+            int height = Math.Min((int)facesData[i, 3], image.Height - y);
 
-            x = Math.Max(0, x);
-            y = Math.Max(0, y);
-            width = Math.Min(width, image.Width - x);
-            height = Math.Min(height, image.Height - y);
-
-            Rectangle faceRectangle = new(x, y, width, height);
-            faceImage.Add(new Mat(image, faceRectangle));
+            faceImages.Add(new Mat(image, new Rectangle(x, y, width, height)));
         }
-        return faceImage;
+        return faceImages;
     }
 }

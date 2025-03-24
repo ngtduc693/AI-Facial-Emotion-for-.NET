@@ -6,58 +6,33 @@ namespace AI.Facial.Emotion;
 
 public class EmotionAnalyzer : IEmotionAnalyzer
 {
-    private readonly FaceDetector _faceDetector;
-    private readonly EmotionRecognizer _emotionRecognizer;
+    private readonly FaceDetector _faceDetector = new();
+    private readonly EmotionRecognizer _emotionRecognizer = new();
     private readonly Configuration _configuration;
 
-    public EmotionAnalyzer()
-    {
-        _faceDetector = new FaceDetector();
-        _emotionRecognizer = new EmotionRecognizer();
-        _configuration = new Configuration() { Threshold = 0.5f, NmsThreshold = 0.3f, TopK = 5000, TargetHadware = Target.Cpu };
-    }
-    public EmotionAnalyzer(Configuration configuration)
-    {
-        _faceDetector = new FaceDetector();
-        _emotionRecognizer = new EmotionRecognizer();
-        _configuration = configuration;
-    }
+    public EmotionAnalyzer(Configuration? configuration = null) =>
+        _configuration = configuration ?? new() { Threshold = 0.5f, NmsThreshold = 0.3f, TopK = 5000, TargetHadware = Target.Cpu };
 
-    public async Task<EmotionResult> AnalyzeEmotionFromUrlAsync(string imageUrl)
-    {
-        using HttpClient httpClient = new();
-        byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
-        return Analyze(imageBytes);
-    }
+    public async Task<string> AnalyzeEmotionFromUrlAsync(string imageUrl) =>
+        Analyze(await new HttpClient().GetByteArrayAsync(imageUrl));
 
-    public Task<EmotionResult> AnalyzeEmotionFromBase64Async(string base64Image)
-    {
-        byte[] imageBytes = Convert.FromBase64String(base64Image);
-        return Task.FromResult(Analyze(imageBytes));
-    }
+    public Task<string> AnalyzeEmotionFromBase64Async(string base64Image) =>
+        Task.FromResult(Analyze(Convert.FromBase64String(base64Image)));
 
-    public async Task<EmotionResult> AnalyzeEmotionFromStreamAsync(Stream fileStream)
-    {
-        using MemoryStream memoryStream = new();
-        await fileStream.CopyToAsync(memoryStream);
-        return Analyze(memoryStream.ToArray());
-    }
+    public async Task<string> AnalyzeEmotionFromStreamAsync(Stream fileStream) =>
+        Analyze(await ReadToEndAsArrayAsync(fileStream));
 
-    private EmotionResult Analyze(byte[] imageData)
+    private string Analyze(byte[] imageData)
     {
         var detectedFaces = _faceDetector.DetectFaces(imageData, _configuration);
+        if (detectedFaces.Count == 0) throw new Exception(ErrorMessage.IMG_NO_FACE);
 
-        if (detectedFaces.Count == 0)
-        {
-            throw new Exception(ErrorMessage.IMG_NO_FACE);
-        }
-
-        var faceBox = detectedFaces.First();
-
-        string emotionScores = _emotionRecognizer.PredictEmotion(faceBox);
-        return new EmotionResult
-        {
-            Emotion = emotionScores,
-        };
+        return _emotionRecognizer.PredictEmotion(detectedFaces[0]);
+    }
+    private static async Task<byte[]> ReadToEndAsArrayAsync(Stream stream)
+    {
+        using var memoryStream = new MemoryStream();
+        await stream.CopyToAsync(memoryStream);
+        return memoryStream.ToArray();
     }
 }
