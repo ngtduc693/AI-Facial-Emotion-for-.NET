@@ -95,6 +95,6 @@ Console.WriteLine($"Emotion: {result}");
 }
 ```
 
-## 📦 Documentation with System Architecture (Overall Architecture, Core Components) and Data Flow
+## 📦 System Architecture (Overall Architecture, Core Components) and Data Flow Documentation
 
-For more information about this library, you can read the documentation System Architecture (Overall Architecture, Core Components) and Data Flow [here](https://deepwiki.com/ngtduc693/AI-Facial-Emotion-for-.NET)
+For more information about this library, you can read the System Architecture (Overall Architecture, Core Components) and Data Flow [documentation here](https://deepwiki.com/ngtduc693/AI-Facial-Emotion-for-.NET)

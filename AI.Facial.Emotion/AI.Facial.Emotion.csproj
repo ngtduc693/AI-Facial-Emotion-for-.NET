@@ -15,12 +15,14 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</RepositoryUrl>
         <RepositoryType>Public</RepositoryType>
-        <PackageReleaseNotes>25.3.26: Optimized for performance in compliance with the latest .NET 10 and C# 14.
-25.3.16 Support for the newly released .NET 9 and .NET 10
-25.3.11 Update the Readme
-25.3.4.2231. Allow user can adjust the Target hardware like CPU, CUDA
-25.3.4. Allow user can adjust the threshold, topK and nms
-25.3.3. Improve the performance</PackageReleaseNotes>
+        <PackageReleaseNotes>
+			25.5.16: Support from .NET 8 to .NET 10 (.NET 6 and .NET 7 is no longer supported)
+			25.3.26: Optimized for performance in compliance with the latest .NET 10 and C# 14.
+			25.3.16 Support for the newly released .NET 9 and .NET 10
+			25.3.11 Update the Readme
+			25.3.4.2231. Allow user can adjust the Target hardware like CPU, CUDA
+			25.3.4. Allow user can adjust the threshold, topK and nms
+			25.3.3. Improve the performance</PackageReleaseNotes>
         <UserSecretsId>f3441286-a018-4373-a686-c21fdc43cac8</UserSecretsId>
         <PackageIcon>icons.jpg</PackageIcon>
         <PackageProjectUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</PackageProjectUrl>
@@ -48,7 +50,7 @@
     <ItemGroup>
         <PackageReference Include="Emgu.CV" Version="4.10.0.5680" />
         <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
-        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.21.0" />
+        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.22.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
