@@ -97,4 +97,4 @@ Console.WriteLine($"Emotion: {result}");
 
 ## 📦 Documentation with System Architecture (Overall Architecture, Core Components) and Data Flow
 
-For any questions, feel free to contact me or create an [issue](https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET) in the repository.
+For more information about this library, you can read the documentation System Architecture (Overall Architecture, Core Components) and Data Flow [here](https://deepwiki.com/ngtduc693/AI-Facial-Emotion-for-.NET)
