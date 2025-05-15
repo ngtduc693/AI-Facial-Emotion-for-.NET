@@ -23,11 +23,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Example.gRPC\Example.gRPC.csproj" />
+    <ProjectReference Include="..\Sample.gRPC.Server\Sample.gRPC.Server.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
 		<Protobuf Include="Protos\emotion.proto" GrpcServices="Client" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\css\site.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\js\site.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\js\webcam.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>

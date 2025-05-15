@@ -11,8 +11,7 @@ namespace Example.WebApps
             builder.Services.AddControllersWithViews();
             builder.Services.AddGrpcClient<EmotionDetector.EmotionDetectorClient>(o =>
             {
-                // add the gRPC server here, you can build it from Example.gRPC project in this solution
-                // or you can create the container from the image from the docker hub by "docker pull ngtduc693/ai.facial.emotion-net10-grpc:lastest"
+                // add the gRPC server here, you can build it from Sample.gRPC.Server project in this solution
                 o.Address = new Uri("http://localhost:5000/");
             });
 
