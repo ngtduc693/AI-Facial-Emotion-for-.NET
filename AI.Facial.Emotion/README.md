@@ -1,5 +1,7 @@
 ﻿# AI.Facial.Emotion
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ngtduc693/AI-Facial-Emotion-for-.NET)
+
 **AI.Facial.Emotion** is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded
 AI models. Ideal for chatbots, customer insights, security, and healthcare applications.
 
@@ -12,13 +14,14 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
 ## 🚀 Features
 
 - Emotion Detection – Recognizes emotions such as happiness, sadness, anger, surprise, and more.
-- Optimized for .NET – Fully compatible with **.NET 6, .NET 8, .NET 9 and .NET 10**.
+- Optimized for .NET – Fully compatible with **.NET 7, .NET 8, .NET 9 and .NET 10**.
 - **Easy Integration** – Works seamlessly with ASP.NET Web APIs, Windows Application, allowing quick integration into existing projects.
 - Supports multiple input formats: **URL, Base64, File Stream**
 
 ## ⚡ Release note
 
 ````bash
+25.5.16: Support from .NET 7 to .NET 10 (.NET 6 is no longer supported)
 25.3.26: Optimized for performance in compliance with the latest .NET 10 and C# 14.
 25.3.16 Support for the newly released .NET 9 and .NET 10
 25.3.11 Update the Readme
