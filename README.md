@@ -22,7 +22,7 @@ AI models. Ideal for chatbots, customer insights, security, and healthcare appli
 ## ⚡ Release note
 
 ````bash
-25.5.16: Support from .NET 7 to .NET 10 (.NET 6 is no longer supported)
+25.5.16: Support from .NET 8 to .NET 10 (.NET 6 and .NET 7 is no longer supported)
 25.3.26: Optimized for performance in compliance with the latest .NET 10 and C# 14.
 25.3.16 Support for the newly released .NET 9 and .NET 10
 25.3.11 Update the Readme
