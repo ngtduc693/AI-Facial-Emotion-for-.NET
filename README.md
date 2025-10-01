@@ -1,4 +1,4 @@
-# AABOUT
+# ABOUT
 
 [![NuGet](https://img.shields.io/nuget/v/AI.Facial.Emotion.svg)](https://www.nuget.org/packages/AI.Facial.Emotion/)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ngtduc693/AI-Facial-Emotion-for-.NET)
