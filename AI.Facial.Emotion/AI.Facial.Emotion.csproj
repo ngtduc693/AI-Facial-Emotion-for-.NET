@@ -4,7 +4,7 @@
         <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>AI.Facial.Emotion</PackageId>
-        <Version>25.5.16</Version>
+        <Version>25.10.2</Version>
         <Authors>ngtduc693</Authors>
         <Description>AI.Facial.Emotion is a .NET library for analyzing facial attributes, including emotion. It seamlessly integrates with C#.NET, providing efficient and secure facial analysis with embedded AI models. Ideal for chatbots, customer insights, security, and healthcare applications.</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -13,9 +13,9 @@
         <Title>AI Facial Emotion</Title>
         <PackageTags>AI,Emotion,.NET,Face</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <RepositoryUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</RepositoryUrl>
+        <RepositoryUrl></RepositoryUrl>
         <RepositoryType>Public</RepositoryType>
-        <PackageReleaseNotes>
+        <PackageReleaseNotes>                                                25.10.2: Support the Native AOT
 			25.5.16: Support from .NET 8 to .NET 10 (.NET 6 and .NET 7 is no longer supported)
 			25.3.26: Optimized for performance in compliance with the latest .NET 10 and C# 14.
 			25.3.16 Support for the newly released .NET 9 and .NET 10
@@ -25,8 +25,35 @@
 			25.3.3. Improve the performance</PackageReleaseNotes>
         <UserSecretsId>f3441286-a018-4373-a686-c21fdc43cac8</UserSecretsId>
         <PackageIcon>icons.jpg</PackageIcon>
-        <PackageProjectUrl>https://github.com/ngtduc693/AI-Facial-Emotion-for-.NET</PackageProjectUrl>
+        <PackageProjectUrl>https://nexus.io.vn/products/ai-facial-emotion</PackageProjectUrl>
         <TargetFramework>net8.0</TargetFramework>
+        <Copyright>Duc Nguyen Thanh</Copyright>
+        <AssemblyVersion>25.10.2</AssemblyVersion>
+        <FileVersion>25.10.2</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'">
+      <IsAotCompatible>True</IsAotCompatible>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0|AnyCPU'">
+      <IsAotCompatible>True</IsAotCompatible>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0|AnyCPU'">
+      <IsAotCompatible>True</IsAotCompatible>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0|AnyCPU'">
+      <IsAotCompatible>True</IsAotCompatible>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0|AnyCPU'">
+      <IsAotCompatible>True</IsAotCompatible>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0|AnyCPU'">
+      <IsAotCompatible>True</IsAotCompatible>
     </PropertyGroup>
 
     <ItemGroup>
@@ -50,8 +77,8 @@
     <ItemGroup>
         <PackageReference Include="Emgu.CV" Version="4.10.0.5680" />
         <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
-        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.22.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.23.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
 
     <ItemGroup>
